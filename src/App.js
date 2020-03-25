@@ -1,26 +1,50 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import {connect} from 'react-redux';
+
+import WelcomePage from "./components/welcome-page";
+import Questions from "./components/questions";
+import Result from "./components/result";
+
+class App extends Component {
+
+    render() {
+
+        let showed;
+
+        console.log(`показывается дисплей ${this.props.showedDisplay}`);
+
+        //выбор отображаемого экрана
+        switch (this.props.showedDisplay) {
+            case 'welcome': {
+                return <WelcomePage/>
+            }
+            case 'questions': {
+                return <Questions/>
+            }
+            case 'result': {
+                return <Result/>
+            }
+            default: {
+                return <Questions/>
+            }
+
+        }
+
+        return (
+            <div className="App">
+                {showed}
+            </div>
+        );
+    }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+    return {
+        showedDisplay: state.showDisplay,
+    }
+};
+
+
+export default connect(mapStateToProps) (App);

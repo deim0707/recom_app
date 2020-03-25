@@ -1,0 +1,8 @@
+.welcomePage  {
+    max-width: 600px;
+    margin: 0 auto;
+    /*margin-top: -5rem;*/
+}
+.welcomePage--content {
+    background: none !important;
+}
