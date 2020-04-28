@@ -11,3 +11,8 @@
 .questions--buttons Button {
 
 }
+
+.hide {
+    /*display: none;*/
+    opacity: 0;
+}

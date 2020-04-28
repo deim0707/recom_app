@@ -27,4 +27,10 @@ export let changeActiveQuestion = (value) => ({
         value
     }
 });
-
+export let changeBtnDisabled = (typeBtn, status) => ({
+    type: 'CHANGE_BTN_DISABLED',
+    payload: {
+        typeBtn,
+        status
+    }
+});

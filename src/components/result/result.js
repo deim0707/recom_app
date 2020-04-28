@@ -47,7 +47,7 @@ class Result extends Component {
                     </ListGroup.Item>
                 </ListGroup>
 
-                <Button variant="success" onClick={this.startTestAgain}>Пройти тест заново</Button>
+                {/*<Button variant="success" onClick={this.startTestAgain}>Пройти тест заново</Button>*/}
             </div>
         )
     }

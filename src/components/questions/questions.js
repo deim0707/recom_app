@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import  {ListGroup, Row, Col, Tab, ProgressBar, Button} from  'react-bootstrap'
 
 import {connect} from 'react-redux';
-import {changeShowDisplay, changeTechnology, nextActiveQuestion, prewActiveQuestion} from '../../store/actions';
+import {changeShowDisplay, changeTechnology, nextActiveQuestion, prewActiveQuestion, changeBtnDisabled} from '../../store/actions';
 
 
 
@@ -15,13 +15,10 @@ class Questions extends Component {
 
     render(){
         const c = console.log;
-
+        //this.props.changeBtnDisabled('next', 'disabled'); //так меняю состояние кнопок
         // c(`bem: ${this.props.technology.bem}`);
-        // this.props.changeTechnology('bem', 221);
-        //ТУТ НАДО ПОМЕНЯТЬ ЗНАЧЕНИЕ В СТЕЙТЕ У ТЕХНОЛОГИЯХ. ПРИ ВЫБОРЕ ОПРЕДЕЛЁННОГО ОТВЕТА
-        const nextQuestion = () => {
-            this.props.nextActiveQuestion();
-        };
+        // this.props.changeTechnology('bem', 221); //так потом буду менять  значения в технологиях
+
 
         let qtQuestions = this.props.questions.length;
         let numberOfQuestion=this.props.activeQuestion;
@@ -29,13 +26,22 @@ class Questions extends Component {
         let answer1=this.props.questions[numberOfQuestion-1].answer[0];
         let answer2=this.props.questions[numberOfQuestion-1].answer[1];
         let answer3=this.props.questions[numberOfQuestion-1].answer[2];
+        let nextButtonDisable = this.props.buttonsDisabled.next; //возьмут из стейта, блокировать ли кнопки переключения вопросов
+        let prewButtonDisable = this.props.buttonsDisabled.prew; //возьмут из стейта, блокировать ли кнопки переключения вопросов
         let progress=Math.trunc(((numberOfQuestion/qtQuestions)*100));
 
 
-        //смена экрана по окончании теста
+        let nextQuestion;
+        //если впереди ещё есть вопросы, то кнопка Вперёд меняет значение ActiveQuestion
+        if (numberOfQuestion<qtQuestions) {
+            nextQuestion = () => {
+                this.props.nextActiveQuestion();
+            };
+        }
+        //смена экрана по окончании теста. кнопка Вперёд меняет функционал на Смену дисплея
         if (numberOfQuestion>=qtQuestions) {
-            console.log(`с вопросов перешли на ${this.props.showedDisplay}`);
-            this.props.changeShowDisplay('result');
+            // console.log(`с вопросов перешли на ${this.props.showedDisplay}`);
+            nextQuestion=()=>this.props.changeShowDisplay('result');
         }
 
         return (
@@ -67,8 +73,17 @@ class Questions extends Component {
                     </Tab.Container>
 
                     <div className="questions--buttons mt-2 d-flex justify-content-around align-content-center">
-                        <Button variant="primary w-25" onClick={this.props.prewActiveQuestion}>Назад</Button>
-                        <Button variant="primary w-25" onClick={nextQuestion}>Вперёд</Button>
+                        <Button variant="primary w-25" id='btnPrew'
+                                className={numberOfQuestion===1 ? 'hide' : ''}
+                                disabled={prewButtonDisable}
+                                onClick={this.props.prewActiveQuestion}>
+                            Назад
+                        </Button>
+                        <Button variant="primary w-25" id='btnNext'
+                                disabled={nextButtonDisable}
+                                onClick={nextQuestion}>
+                            Вперёд
+                        </Button>
                     </div>
 
                 </Col>
@@ -83,11 +98,12 @@ const mapStateToProps = (state) => {
         technology: state.technology,
         questions: state.questions,
         activeQuestion: state.activeQuestion,
-        showedDisplay: state.showDisplay
+        showedDisplay: state.showDisplay,
+        buttonsDisabled : state.buttonsDisabled
     }
 };
 const mapDispatchToProps = {
-    changeTechnology, nextActiveQuestion, prewActiveQuestion, changeShowDisplay
+    changeTechnology, nextActiveQuestion, prewActiveQuestion, changeShowDisplay, changeBtnDisabled
 };
 
 export default connect(mapStateToProps, mapDispatchToProps) (Questions);

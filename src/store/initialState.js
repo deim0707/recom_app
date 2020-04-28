@@ -1,15 +1,19 @@
 
 const initialState = {
     activeQuestion: 1,
-    showDisplay: 'welcome',
+    showDisplay: 'questions',
+    buttonsDisabled: {
+        next: false,
+        prew: false
+    },
 
     questions: [
          {
-            question_text: '1Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium, ad aliquid aperiam architecto consequatur corporis culpa cupiditate dignissimos distinctio dolor eos error exercitationem hic in ipsam iusto labore maxime minus neque nesciunt nisi nulla odio optio possimus quas, quibusdam quos recusandae rem soluta temporibus vel velit veniam voluptas voluptatem.',
+            question_text: 'Как вы предпочитаете указывать размеры элеметов?',
             answer: [
-                'bem1',
-                'adaptive1',
-                'struct1'
+                'Лучше указать фиксированно, а потом переопределить в медиа-запросе.',
+                'Относительно шрифта заданного <html>.',
+                'Относительно ширины блока.'
             ]
         },
          {
