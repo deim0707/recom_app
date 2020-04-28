@@ -3,7 +3,7 @@ const initialState = {
     activeQuestion: 1,
     showDisplay: 'questions',
     buttonsDisabled: {
-        next: false,
+        next: true,
         prew: false
     },
 

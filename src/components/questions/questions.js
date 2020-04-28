@@ -15,8 +15,7 @@ class Questions extends Component {
 
     render(){
         const c = console.log;
-        //this.props.changeBtnDisabled('next', 'disabled'); //так меняю состояние кнопок
-        // c(`bem: ${this.props.technology.bem}`);
+        this.props.changeBtnDisabled('next', false); //так разблокирую кнопку
         // this.props.changeTechnology('bem', 221); //так потом буду менять  значения в технологиях
 
 
@@ -44,6 +43,12 @@ class Questions extends Component {
             nextQuestion=()=>this.props.changeShowDisplay('result');
         }
 
+        //выбор ответа, разблокировка кнопки
+        const selectAnswer = (numberOfAnswer) => {
+            console.log(`нажал на ответ ${numberOfAnswer}`)
+            this.props.changeBtnDisabled('next', false);
+        };
+
         return (
             <div className='questions'>
                 <Col sm={8} className="d-flex justify-content-center vh-100 flex-column questions--content">
@@ -58,13 +63,19 @@ class Questions extends Component {
                         <Row>
                             <Col sm={12} className=''>
                                 <ListGroup>
-                                    <ListGroup.Item action href="#link1" key={uniqid()}>
+                                    <ListGroup.Item action href="#link1"
+                                                    key={uniqid()}
+                                                    onClick={()=>selectAnswer(1)}>
                                         {answer1}
                                     </ListGroup.Item>
-                                    <ListGroup.Item action href="#link2" key={uniqid()}>
+                                    <ListGroup.Item action href="#link2"
+                                                    key={uniqid()}
+                                                    onClick={()=>selectAnswer(2)}>
                                         {answer2}
                                     </ListGroup.Item>
-                                    <ListGroup.Item action href="#link3" key={uniqid()}>
+                                    <ListGroup.Item action href="#link3"
+                                                    key={uniqid()}
+                                                    onClick={()=>selectAnswer(3)}>
                                         {answer3}
                                     </ListGroup.Item>
                                 </ListGroup>
