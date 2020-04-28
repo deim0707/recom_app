@@ -15,7 +15,7 @@ class Questions extends Component {
 
     render(){
         const c = console.log;
-        this.props.changeBtnDisabled('next', false); //так разблокирую кнопку
+        // this.props.changeBtnDisabled('next', false); //так разблокирую кнопку
         // this.props.changeTechnology('bem', 221); //так потом буду менять  значения в технологиях
 
 
@@ -45,7 +45,7 @@ class Questions extends Component {
 
         //выбор ответа, разблокировка кнопки
         const selectAnswer = (numberOfAnswer) => {
-            console.log(`нажал на ответ ${numberOfAnswer}`)
+            console.log(`нажал на ответ ${numberOfAnswer}`);
             this.props.changeBtnDisabled('next', false);
         };
 
