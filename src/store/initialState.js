@@ -1,6 +1,6 @@
 const initialState = {
     activeQuestion: 1,
-    showDisplay: 'questions',
+    showDisplay: 'welcome',
     buttonsDisabled: {
         next: true,
         prew: false
