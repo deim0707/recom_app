@@ -81,7 +81,8 @@ let reducer = (state = initialState, action) => {
                         state.buttonsDisabled,
                         {[typeBtn]: status}
                     )
-                })
+                }
+            )
         }
 
         default: {

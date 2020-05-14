@@ -31,9 +31,20 @@ class Questions extends Component {
         const answer3 = this.props.questions[numberOfQuestion - 1].answers[2];
         const nextButtonDisable = this.props.buttonsDisabled.next; //возьмут из стейта, блокировать ли кнопки переключения вопросов
         const prewButtonDisable = this.props.buttonsDisabled.prew; //возьмут из стейта, блокировать ли кнопки переключения вопросов
-        const progress = Math.trunc(((numberOfQuestion / qtQuestions) * 100));
+        const progress = Math.trunc((((numberOfQuestion-1) / qtQuestions) * 100));
 
-        //выбор ответа, разблокировка кнопки
+        const makeStyleSelectedAnswer = (answer) => {
+            const style = {
+                zIndex: '2',
+                color: '#fff',
+                backgroundColor: '#007bff',
+                borderColor: '#007bff',
+            };
+
+            return this.selectedAnswer && this.selectedAnswer.numberOfAnswer === answer.numberOfAnswer ? style : null
+        };
+
+        //выбор ответа
         const doSelectAnswer = (answer) => {
             this.props.changeBtnDisabled('next', false);
             this.selectedAnswer = answer;
@@ -53,6 +64,7 @@ class Questions extends Component {
         const nextQuestion = (answer) => {
             changeTechonology(answer, true);
             this.lastSelectedAnswer=answer;
+            this.selectedAnswer=null;
             //переключаем на следующий вопрос и блокируем кнопку
             if (numberOfQuestion < qtQuestions) {
                 this.props.changeBtnDisabled('next', true);
@@ -67,11 +79,12 @@ class Questions extends Component {
             changeTechonology(answer, false);
         };
 
-
         return (
             <div className='questions'>
                 <Col sm={8} className="d-flex justify-content-center vh-100 flex-column questions--content">
+
                     <h2>Вопрос №{numberOfQuestion} из {qtQuestions}</h2>
+
                     <p key={uniqid()}>
                         {questionText}
                     </p>
@@ -82,18 +95,24 @@ class Questions extends Component {
                         <Row>
                             <Col sm={12} className=''>
                                 <ListGroup>
-                                    <ListGroup.Item action href="#link1"
+                                    <ListGroup.Item action
+                                                    // href="#link1"
                                                     key={uniqid()}
+                                                    style={makeStyleSelectedAnswer(answer1)}
                                                     onClick={() => doSelectAnswer(answer1)}>
                                         {answer1.text}
                                     </ListGroup.Item>
-                                    <ListGroup.Item action href="#link2"
+                                    <ListGroup.Item action
+                                                    // href="#link2"
                                                     key={uniqid()}
+                                                    style={makeStyleSelectedAnswer(answer2)}
                                                     onClick={() => doSelectAnswer(answer2)}>
                                         {answer2.text}
                                     </ListGroup.Item>
-                                    <ListGroup.Item action href="#link3"
+                                    <ListGroup.Item action
+                                                    // href="#link3"
                                                     key={uniqid()}
+                                                    style={makeStyleSelectedAnswer(answer3)}
                                                     onClick={() => doSelectAnswer(answer3)}>
                                         {answer3.text}
                                     </ListGroup.Item>
