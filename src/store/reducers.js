@@ -15,6 +15,8 @@ let reducer = (state = initialState, action) => {
         case 'CHANGE_TECHNOLOGY': {
             let nameTechnology = action.payload.technology;
             let value = action.payload.value;
+            console.log(`CHANGE_TECHNOLOGY на технологию ${nameTechnology} со значением ${value}`);
+
             return update(state, {
                 technology: {
                     [nameTechnology]: {
@@ -81,11 +83,6 @@ let reducer = (state = initialState, action) => {
                         {[typeBtn]: status}
                     )
                 })
-            // return  {
-            //     ...state,
-            //     ...{buttonsDisabled: {...state.buttonsDisabled,
-            //         ...{[typeBtn]:status}}}
-            // }
         }
 
         default: {
