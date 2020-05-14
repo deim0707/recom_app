@@ -11,7 +11,7 @@ class App extends Component {
 
     render() {
 
-        let showed;
+        // let showed;
 
         // console.log(`показывается дисплей ${this.props.showedDisplay}`);
 
@@ -32,11 +32,11 @@ class App extends Component {
 
         }
 
-        return (
-            <div className="App">
-                {showed}
-            </div>
-        );
+        // return (
+        //     <div className="App">
+        //         {showed}
+        //     </div>
+        // );
     }
 }
 

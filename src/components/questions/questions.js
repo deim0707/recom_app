@@ -96,21 +96,18 @@ class Questions extends Component {
                             <Col sm={12} className=''>
                                 <ListGroup>
                                     <ListGroup.Item action
-                                                    // href="#link1"
                                                     key={uniqid()}
                                                     style={makeStyleSelectedAnswer(answer1)}
                                                     onClick={() => doSelectAnswer(answer1)}>
                                         {answer1.text}
                                     </ListGroup.Item>
                                     <ListGroup.Item action
-                                                    // href="#link2"
                                                     key={uniqid()}
                                                     style={makeStyleSelectedAnswer(answer2)}
                                                     onClick={() => doSelectAnswer(answer2)}>
                                         {answer2.text}
                                     </ListGroup.Item>
                                     <ListGroup.Item action
-                                                    // href="#link3"
                                                     key={uniqid()}
                                                     style={makeStyleSelectedAnswer(answer3)}
                                                     onClick={() => doSelectAnswer(answer3)}>
@@ -123,8 +120,8 @@ class Questions extends Component {
 
                     <div className="questions--buttons mt-2 d-flex justify-content-around align-content-center">
                         <Button variant="primary w-25" id='btnPrew'
-                                className={numberOfQuestion === 1 ? 'hide' : ''}
-                                disabled={prewButtonDisable}
+                                // className={numberOfQuestion === 1 ? 'hide' : ''}
+                                disabled={numberOfQuestion === 1}
                                 onClick={() => prewQuestion(this.lastSelectedAnswer)}>
                             Назад
                         </Button>
