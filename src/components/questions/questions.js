@@ -15,49 +15,58 @@ import {
 
 
 class Questions extends Component {
-    selectedAnswer;
+
+    selectedAnswer; //выбранный ответ
+    lastSelectedAnswer; //послей занесённый в стор ответ. используется для удаления значения, при нажатии кнопки Назад
 
     render() {
         const c = console.log;
 
 
-        let qtQuestions = this.props.questions.length;
-        let numberOfQuestion = this.props.activeQuestion;
-        let questionText = this.props.questions[numberOfQuestion - 1].question_text;
-        let answer1 = this.props.questions[numberOfQuestion - 1].answers[0];
-        let answer2 = this.props.questions[numberOfQuestion - 1].answers[1];
-        let answer3 = this.props.questions[numberOfQuestion - 1].answers[2];
-        let nextButtonDisable = this.props.buttonsDisabled.next; //возьмут из стейта, блокировать ли кнопки переключения вопросов
-        let prewButtonDisable = this.props.buttonsDisabled.prew; //возьмут из стейта, блокировать ли кнопки переключения вопросов
-        let progress = Math.trunc(((numberOfQuestion / qtQuestions) * 100));
-
-
-        const nextQuestion = (answer) => {
-            //если впереди ещё есть вопросы, то кнопка Вперёд меняет значение ActiveQuestion
-            let nameTechnology = answer.nameTechnology;
-            let price = answer.price;
-            let oldValue = this.props.technology[nameTechnology];
-            this.props.changeTechnology(
-                nameTechnology,
-                oldValue + price
-            );
-            
-            if (numberOfQuestion < qtQuestions) {
-                this.props.changeBtnDisabled('next', true);
-                this.props.nextActiveQuestion();
-            }
-
-            //смена экрана по окончании теста. кнопка Вперёд меняет функционал на Смену дисплея
-            if (numberOfQuestion >= qtQuestions) this.props.changeShowDisplay('result');
-        };
-
+        const qtQuestions = this.props.questions.length;
+        const numberOfQuestion = this.props.activeQuestion;
+        const questionText = this.props.questions[numberOfQuestion - 1].question_text;
+        const answer1 = this.props.questions[numberOfQuestion - 1].answers[0];
+        const answer2 = this.props.questions[numberOfQuestion - 1].answers[1];
+        const answer3 = this.props.questions[numberOfQuestion - 1].answers[2];
+        const nextButtonDisable = this.props.buttonsDisabled.next; //возьмут из стейта, блокировать ли кнопки переключения вопросов
+        const prewButtonDisable = this.props.buttonsDisabled.prew; //возьмут из стейта, блокировать ли кнопки переключения вопросов
+        const progress = Math.trunc(((numberOfQuestion / qtQuestions) * 100));
 
         //выбор ответа, разблокировка кнопки
         const doSelectAnswer = (answer) => {
             this.props.changeBtnDisabled('next', false);
             this.selectedAnswer = answer;
         };
-        c(this.selectedAnswer);
+
+        const changeTechonology = (answer, thisIncrement) => {
+            const nameTechnology = answer.nameTechnology;
+            const oldValue = this.props.technology[nameTechnology];
+            const newValue = thisIncrement ? oldValue + answer.price : oldValue - answer.price;
+
+            this.props.changeTechnology(
+                nameTechnology,
+                newValue
+            );
+        };
+
+        const nextQuestion = (answer) => {
+            changeTechonology(answer, true);
+            this.lastSelectedAnswer=answer;
+            //переключаем на следующий вопрос и блокируем кнопку
+            if (numberOfQuestion < qtQuestions) {
+                this.props.changeBtnDisabled('next', true);
+                this.props.nextActiveQuestion();
+            }
+            //смена экрана по окончании теста. кнопка Вперёд меняет функционал на Смену дисплея
+            if (numberOfQuestion >= qtQuestions) this.props.changeShowDisplay('result');
+        };
+
+        const prewQuestion = (answer) => {
+            this.props.prewActiveQuestion();
+            changeTechonology(answer, false);
+        };
+
 
         return (
             <div className='questions'>
@@ -97,7 +106,7 @@ class Questions extends Component {
                         <Button variant="primary w-25" id='btnPrew'
                                 className={numberOfQuestion === 1 ? 'hide' : ''}
                                 disabled={prewButtonDisable}
-                                onClick={this.props.prewActiveQuestion}>
+                                onClick={() => prewQuestion(this.lastSelectedAnswer)}>
                             Назад
                         </Button>
                         <Button variant="primary w-25" id='btnNext'

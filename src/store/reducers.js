@@ -13,9 +13,8 @@ let reducer = (state = initialState, action) => {
         }
 
         case 'CHANGE_TECHNOLOGY': {
-            let nameTechnology = action.payload.technology;
-            let value = action.payload.value;
-            console.log(`CHANGE_TECHNOLOGY на технологию ${nameTechnology} со значением ${value}`);
+            const nameTechnology = action.payload.technology;
+            const value = action.payload.value;
 
             return update(state, {
                 technology: {
@@ -25,7 +24,7 @@ let reducer = (state = initialState, action) => {
                 }
             })
         }
-//тут новый способ задачи стейта
+
         case 'NEXT_ACTIVE_QUESTION': {
             let numberQuestion = ++initialState.activeQuestion;
             if (numberQuestion >= state.questions.length) {
@@ -69,8 +68,8 @@ let reducer = (state = initialState, action) => {
         }
 
         case 'CHANGE_BTN_DISABLED': {
-            let status = action.payload.status;
-            let typeBtn = action.payload.typeBtn;
+            const status = action.payload.status;
+            const typeBtn = action.payload.typeBtn;
             // console.log(`CHANGE_BTN_DISABLED сработал. Результат: ${initialState.buttonsDisabled.next}`);
 
             return Object.assign(
