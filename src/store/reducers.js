@@ -29,13 +29,13 @@ let reducer = (state = initialState, action) => {
             if (numberQuestion >= state.questions.length) {
                 numberQuestion = state.questions.length;
             }
-            console.log(`Номер вопроса: ${initialState.activeQuestion}`);
+            // console.log(`Номер вопроса: ${initialState.activeQuestion}`);
             //срабатывает при достижении конца массива вопросов
             if (initialState.activeQuestion > initialState.questions.length) {
                 console.log('aaaaaaaaaaaaaaaa')
             }
             return Object.assign({}, state, {
-                activeQuestion: numberQuestion
+                activeQuestion: numberQuestion,
             })
         }
 
@@ -69,7 +69,7 @@ let reducer = (state = initialState, action) => {
         case 'CHANGE_BTN_DISABLED': {
             let status = action.payload.status;
             let typeBtn = action.payload.typeBtn;
-            console.log(`CHANGE_BTN_DISABLED сработал. Результат: ${initialState.buttonsDisabled.next}`)
+            // console.log(`CHANGE_BTN_DISABLED сработал. Результат: ${initialState.buttonsDisabled.next}`);
 
             return Object.assign(
                 {},

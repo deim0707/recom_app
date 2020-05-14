@@ -13,7 +13,7 @@ class App extends Component {
 
         let showed;
 
-        console.log(`показывается дисплей ${this.props.showedDisplay}`);
+        // console.log(`показывается дисплей ${this.props.showedDisplay}`);
 
         //выбор отображаемого экрана
         switch (this.props.showedDisplay) {

@@ -26,23 +26,23 @@ class Result extends Component {
                 </p>
                 <ListGroup variant="flush">
                     <ListGroup.Item>
-                        БЭМ:    &nbsp;
+                        PX:    &nbsp;
                         <span>
-                            {this.props.technology.bem}
+                            {this.props.technology.px}
                         </span>
                     </ListGroup.Item>
 
                     <ListGroup.Item>
-                        Адаптив:  &nbsp;
+                        EM:  &nbsp;
                         <span>
-                            {this.props.technology.adaptive}
+                            {this.props.technology.em}
                         </span>
                     </ListGroup.Item>
 
                     <ListGroup.Item>
-                        Что-то ещё:  &nbsp;
+                        REM:  &nbsp;
                         <span>
-                            {this.props.technology.struct}
+                            {this.props.technology.rem}
                         </span>
                     </ListGroup.Item>
                 </ListGroup>

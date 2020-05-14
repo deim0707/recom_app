@@ -16,25 +16,26 @@ class Questions extends Component {
     render(){
         const c = console.log;
         // this.props.changeBtnDisabled('next', false); //так разблокирую кнопку
-        // this.props.changeTechnology('bem', 221); //так потом буду менять  значения в технологиях
-
+        // this.props.changeTechnology('px', 221); //так потом буду менять  значения в технологиях
 
         let qtQuestions = this.props.questions.length;
         let numberOfQuestion=this.props.activeQuestion;
         let questionText = this.props.questions[numberOfQuestion-1].question_text;
-        let answer1=this.props.questions[numberOfQuestion-1].answer[0];
-        let answer2=this.props.questions[numberOfQuestion-1].answer[1];
-        let answer3=this.props.questions[numberOfQuestion-1].answer[2];
+        let answer1=this.props.questions[numberOfQuestion-1].answers[0];
+        let answer2=this.props.questions[numberOfQuestion-1].answers[1];
+        let answer3=this.props.questions[numberOfQuestion-1].answers[2];
         let nextButtonDisable = this.props.buttonsDisabled.next; //возьмут из стейта, блокировать ли кнопки переключения вопросов
         let prewButtonDisable = this.props.buttonsDisabled.prew; //возьмут из стейта, блокировать ли кнопки переключения вопросов
         let progress=Math.trunc(((numberOfQuestion/qtQuestions)*100));
 
-
+        //обновленияет, при нажатии на вариант ответы
+        let selectedAnswer;
         let nextQuestion;
         //если впереди ещё есть вопросы, то кнопка Вперёд меняет значение ActiveQuestion
         if (numberOfQuestion<qtQuestions) {
             nextQuestion = () => {
                 this.props.nextActiveQuestion();
+                this.props.changeBtnDisabled('next', true);
             };
         }
         //смена экрана по окончании теста. кнопка Вперёд меняет функционал на Смену дисплея
@@ -44,10 +45,18 @@ class Questions extends Component {
         }
 
         //выбор ответа, разблокировка кнопки
-        const selectAnswer = (numberOfAnswer) => {
-            console.log(`нажал на ответ ${numberOfAnswer}`);
+        const doSelectAnswer = (answer) => {
             this.props.changeBtnDisabled('next', false);
+            let nameTechnology = answer.nameTechnology;
+            let price = answer.price;
+            let oldValue = this.props.technology[nameTechnology];
+
+            this.props.changeTechnology(
+                nameTechnology,
+                oldValue + price
+            )
         };
+        // this.props.changeTechnology('px', 221); //так потом буду менять  значения в технологиях
 
         return (
             <div className='questions'>
@@ -65,18 +74,18 @@ class Questions extends Component {
                                 <ListGroup>
                                     <ListGroup.Item action href="#link1"
                                                     key={uniqid()}
-                                                    onClick={()=>selectAnswer(1)}>
-                                        {answer1}
+                                                    onClick={()=>doSelectAnswer(answer1)}>
+                                        {answer1.text}
                                     </ListGroup.Item>
                                     <ListGroup.Item action href="#link2"
                                                     key={uniqid()}
-                                                    onClick={()=>selectAnswer(2)}>
-                                        {answer2}
+                                                    onClick={()=>doSelectAnswer(answer2)}>
+                                        {answer2.text}
                                     </ListGroup.Item>
                                     <ListGroup.Item action href="#link3"
                                                     key={uniqid()}
-                                                    onClick={()=>selectAnswer(3)}>
-                                        {answer3}
+                                                    onClick={()=>doSelectAnswer(answer3)}>
+                                        {answer3.text}
                                     </ListGroup.Item>
                                 </ListGroup>
                             </Col>

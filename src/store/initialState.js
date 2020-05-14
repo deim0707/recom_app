@@ -1,4 +1,3 @@
-
 const initialState = {
     activeQuestion: 1,
     showDisplay: 'questions',
@@ -8,36 +7,74 @@ const initialState = {
     },
 
     questions: [
-         {
+        {
             question_text: 'Как вы предпочитаете указывать размеры элеметов?',
-            answer: [
-                'Лучше указать фиксированно, а потом переопределить в медиа-запросе.',
-                'Относительно шрифта заданного <html>.',
-                'Относительно ширины блока.'
+            answers: [
+                {
+                    text: 'Лучше указать фиксированно, а потом переопределить в медиа-запросе.',
+                    nameTechnology: 'px',
+                    price: 1
+                },
+                {
+                    text: 'Относительно шрифта заданного <html>.',
+                    nameTechnology: 'em',
+                    price: 1
+                },
+                {
+                    text: 'Относительно ширины блока.',
+                    nameTechnology: 'rem',
+                    price: 1
+                }
             ]
         },
-         {
-            question_text: '2Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam aut beatae commodi doloribus explicabo optio quia ratione repellat tempore voluptate.',
-            answer: [
-                'bem2',
-                'adaptive2',
-                'struct2'
-            ]
-         },
+
         {
-            question_text: '3Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam aut beatae commodi doloribus explicabo optio quia ratione repellat tempore voluptate.',
-            answer: [
-                'bem3',
-                'adaptive3',
-                'struct3'
+            question_text: 'Как вы предпочитаете указывать размеры элеметов?',
+            answers: [
+                {
+                    text: 'b1',
+                    nameTechnology: 'px',
+                    price: 1
+                },
+                {
+                    text: 'b2',
+                    nameTechnology: 'em',
+                    price: 1
+                },
+                {
+                    text: 'b3',
+                    nameTechnology: 'rem',
+                    price: 1
+                }
             ]
-        }
+        },
+
+        {
+            question_text: 'Как вы предпочитаете указывать размеры элеметов?',
+            answers: [
+                {
+                    text: 'c1',
+                    nameTechnology: 'px',
+                    price: 1
+                },
+                {
+                    text: 'c2',
+                    nameTechnology: 'em',
+                    price: 1
+                },
+                {
+                    text: 'c3',
+                    nameTechnology: 'rem',
+                    price: 1
+                }
+            ]
+        },
     ],
 
     technology: {
-        bem: 11,
-        adaptive: 2,
-        struct: 0
+        px: 1,
+        em: 2,
+        rem: 3
     }
 
 };
