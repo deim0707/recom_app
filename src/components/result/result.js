@@ -1,66 +1,48 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './result.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import  {ListGroup, Button} from  'react-bootstrap'
-import {connect} from 'react-redux';
-import {changeShowDisplay, changeActiveQuestion} from '../../store/actions';
+import {ListGroup} from 'react-bootstrap'
+import {useSelector} from 'react-redux';
 
 
+const Result = () => {
 
-class Result extends Component {
-    startTestAgain= () => {
-        this.props.changeActiveQuestion(1);
-        this.props.changeShowDisplay('questions');
-        console.log(`с результатов перешли на ${this.props.showedDisplay}`);
-    };
+    const technology = useSelector( (state) => {
+        return state.technology
+    })
 
+    return (
+        <div className='result col-8'>
+            <h3>Ваши результаты</h3>
+            <p className='mt-2'>
+                Ниже представлена информация с результатами прохождения теста. <br/>
+                Чем больше число напротив технологии, тем больше она вам подходит.
+            </p>
 
-    render(){
-
-        return (
-            <div className='result col-8'>
-                <h3>Ваши результаты</h3>
-                <p className='mt-2'>
-                    Ниже представлена информация с результатами прохождения теста. <br/>
-                    Чем больше число напротив технологии, тем больше она вам подходит.
-                </p>
-                <ListGroup variant="flush">
-                    <ListGroup.Item>
-                        PX:    &nbsp;
-                        <span>
-                            {this.props.technology.px}
-                        </span>
-                    </ListGroup.Item>
-
-                    <ListGroup.Item>
-                        EM:  &nbsp;
-                        <span>
-                            {this.props.technology.em}
-                        </span>
-                    </ListGroup.Item>
-
-                    <ListGroup.Item>
-                        REM:  &nbsp;
-                        <span>
-                            {this.props.technology.rem}
-                        </span>
-                    </ListGroup.Item>
-                </ListGroup>
-
-                {/*<Button variant="success" onClick={this.startTestAgain}>Пройти тест заново</Button>*/}
-            </div>
-        )
-    }
+            <ListGroup variant="flush">
+                <ItemTechnologe text='PX' typeItem={technology.px}/>
+                <ItemTechnologe text='EM' typeItem={technology.smacss}/>
+                <ItemTechnologe text='REM' typeItem={technology.em}/>
+                <ItemTechnologe text='Инкрементная модель' typeItem={technology.incr}/>
+                <ItemTechnologe text='Каскадная модель' typeItem={technology.kaskad}/>
+                <ItemTechnologe text='Спиральная модель' typeItem={technology.spiral}/>
+                <ItemTechnologe text='БЭМ' typeItem={technology.bem}/>
+                <ItemTechnologe text='SMACSS' typeItem={technology.smacss}/>
+            </ListGroup>
+        </div>
+    )
 }
 
-const mapStateToProps = (state) => {
-    return {
-        technology: state.technology,
-        showedDisplay: state.showDisplay,
-    }
-};
-const mapDispatchToProps = {
-    changeShowDisplay, changeActiveQuestion
-};
+export default Result;
 
-export default connect(mapStateToProps, mapDispatchToProps) (Result);
+
+const ItemTechnologe = ({text, typeItem}) => {
+    return (
+        <ListGroup.Item>
+            {text}:  &nbsp;
+            <span>
+                {typeItem}
+            </span>
+        </ListGroup.Item>
+    )
+} 

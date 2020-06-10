@@ -31,7 +31,7 @@ class Questions extends Component {
         const answer3 = this.props.questions[numberOfQuestion - 1].answers[2];
         const nextButtonDisable = this.props.buttonsDisabled.next; //возьмут из стейта, блокировать ли кнопки переключения вопросов
         const prewButtonDisable = this.props.buttonsDisabled.prew; //возьмут из стейта, блокировать ли кнопки переключения вопросов
-        const progress = Math.trunc((((numberOfQuestion-1) / qtQuestions) * 100));
+        const progress = Math.trunc((((numberOfQuestion - 1) / qtQuestions) * 100));
 
         const makeStyleSelectedAnswer = (answer) => {
             const style = {
@@ -63,8 +63,8 @@ class Questions extends Component {
 
         const nextQuestion = (answer) => {
             changeTechonology(answer, true);
-            this.lastSelectedAnswer=answer;
-            this.selectedAnswer=null;
+            this.lastSelectedAnswer = answer;
+            this.selectedAnswer = null;
             //переключаем на следующий вопрос и блокируем кнопку
             if (numberOfQuestion < qtQuestions) {
                 this.props.changeBtnDisabled('next', true);
@@ -120,7 +120,7 @@ class Questions extends Component {
 
                     <div className="questions--buttons mt-2 d-flex justify-content-around align-content-center">
                         <Button variant="primary w-25" id='btnPrew'
-                                // className={numberOfQuestion === 1 ? 'hide' : ''}
+                            // className={numberOfQuestion === 1 ? 'hide' : ''}
                                 disabled={numberOfQuestion === 1}
                                 onClick={() => prewQuestion(this.lastSelectedAnswer)}>
                             Назад
